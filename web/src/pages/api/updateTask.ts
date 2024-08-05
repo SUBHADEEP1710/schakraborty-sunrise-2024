@@ -1,0 +1,12 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import { updateTask } from '@/modules/taskManager';
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method === 'POST') {
+        const { taskId, updatedTask } = req.body;
+        updateTask(taskId, updatedTask);
+        res.status(200).json({ message: 'Task updated' });
+    } else {
+        res.status(405).json({ message: 'Method not allowed' });
+    }
+}
